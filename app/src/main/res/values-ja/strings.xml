@@ -25,6 +25,10 @@
     <string name="stopped_label">停止中</string>
     <string name="btn_start">開始</string>
     <string name="btn_stop">停止</string>
+    <string name="btn_allow">許可</string>
+    <string name="btn_open_settings">設定を開く</string>
+    <string name="local_network_label">近くのデバイスへのアクセスが必要です</string>
+    <string name="local_network_desc">AirPlayデバイスがこの端末を見つけて接続できるように、近くのデバイスへのアクセスを許可してください</string>
     <string name="unknown_track">不明</string>
 
     <!-- Content descriptions -->
@@ -35,9 +39,9 @@
     <string name="cd_play_pause">再生/一時停止</string>
     <string name="cd_rewind">巻き戻し</string>
     <string name="cd_fast_forward">早送り</string>
-    <string name="cd_volume_down">音量を下げる</string>
-    <string name="cd_volume_up">音量を上げる</string>
-    <string name="cd_mute">ミュート</string>
+    <string name="volume_server">受信側の音量</string>
+    <string name="volume_client">送信側の音量</string>
+    <string name="volume_value">%1$d%%</string>
     <string name="cd_download">動画をダウンロード</string>
     <string name="cd_cancel_download">ダウンロードをキャンセル</string>
 
@@ -93,17 +97,19 @@
     <string name="setting_require_pin">PINを要求（ベータ）</string>
     <string name="setting_require_pin_desc">新しい接続のたびに4桁のPINを要求します</string>
     <string name="setting_allow_new_conn">新規接続を許可</string>
-    <string name="setting_allow_new_conn_desc">新しいクライアントが接続すると現在の接続を切断します</string>
+    <string name="setting_allow_new_conn_desc">新しい送信側が接続すると、現在の接続を切断します</string>
 
     <!-- Settings: Display -->
     <string name="setting_idle_preview">待機画面プレビュー</string>
     <string name="setting_idle_preview_desc">接続待機中も映像サーフェスを表示します</string>
     <string name="setting_auto_fullscreen">自動的に全画面表示</string>
-    <string name="setting_auto_fullscreen_desc">クライアントが接続したときに全画面表示にします</string>
+    <string name="setting_auto_fullscreen_desc">送信側が接続したときに全画面表示にします</string>
     <string name="setting_keep_screen_on">画面をスリープさせない</string>
-    <string name="setting_keep_screen_on_desc">クライアント接続中はスリープを防止します</string>
+    <string name="setting_keep_screen_on_desc">送信側の接続中はスリープを防止します</string>
     <string name="setting_advertise_video">AirPlay動画対応を通知</string>
     <string name="setting_advertise_video_desc">オフにすると、動画は音声のみのストリームとしてキャストされます</string>
+    <string name="setting_advertise_mirroring">AirPlayミラーリング対応を通知</string>
+    <string name="setting_advertise_mirroring_desc">オフにすると、この端末はミラーリングの接続先として表示されなくなります</string>
     <string name="setting_advertise_audio">AirPlay音声対応を通知</string>
     <string name="setting_advertise_audio_desc">オフにすると、この端末はミラーリング専用となり、メディアプレーヤーからは表示されなくなります</string>
     <string name="setting_alac">ALACコーデックを通知</string>
@@ -111,15 +117,20 @@
     <string name="setting_aac">AACコーデックを通知</string>
     <string name="setting_aac_desc">mDNSレコードでAAC-ELD/AAC-LCを提供します。画面ミラーリングの音声に使用されます</string>
     <string name="setting_launch_on_connect">接続時にこのアプリを開く</string>
-    <string name="setting_launch_on_connect_desc">クライアント接続時に画面を表示します</string>
+    <string name="setting_launch_on_connect_desc">送信側が接続したときに画面を表示します</string>
     <string name="setting_launch_on_connect_no_permission">タップして「他のアプリの上に表示」権限を許可</string>
+    <string name="setting_discovery">検出に使うネットワーク</string>
+    <string name="setting_discovery_all_desc">利用可能なすべてのインターフェースで通知します。NsdManagerを使用します</string>
+    <string name="setting_discovery_usb_desc">USBテザリングでのみ通知し、有線接続に限定します。独自のmDNSレスポンダーを使用します</string>
+    <string name="chip_all_networks">すべてのネットワーク</string>
+    <string name="chip_usb_only">USBのみ</string>
     <string name="setting_resolution">解像度</string>
-    <string name="setting_resolution_desc">クライアントに通知する動画の解像度</string>
+    <string name="setting_resolution_desc">送信側に通知する動画の解像度</string>
     <string name="setting_resolution_placeholder">[幅]x[高さ]</string>
     <string name="setting_resolution_width">幅</string>
     <string name="setting_resolution_height">高さ</string>
     <string name="setting_max_fps">最大FPS</string>
-    <string name="setting_max_fps_desc">クライアントに通知する最大フレームレート</string>
+    <string name="setting_max_fps_desc">送信側に通知する最大フレームレート</string>
     <string name="setting_max_fps_placeholder">FPS</string>
     <string name="setting_overscanned">オーバースキャン対応</string>
     <string name="setting_overscanned_desc">全画面オーバースキャン表示用に画面端の余白を追加します</string>
@@ -129,11 +140,15 @@
 
     <!-- Settings: Decode -->
     <string name="setting_h265">H.265（HEVC）</string>
-    <string name="setting_h265_desc">端末が対応していればH.265の動画デコードを有効にします</string>
+    <string name="setting_h265_desc">自動の場合、動作が確認されているH.265デコーダーのみを使用します</string>
     <string name="setting_enforce_sdr">MediaFormat.KEY_COLOR_TRANSFER</string>
     <string name="setting_enforce_sdr_desc">映像を限定SDRとしてタグ付けします。オフにするとHDRソースをそのまま通過させます</string>
     <string name="setting_sw_alac">ソフトウェアALACデコーダーを強制使用</string>
-    <string name="setting_sw_alac_desc">ハードウェアデコーダーの代わりに常にソフトウェアALACデコーダーを使用します。音声遅延に影響する場合があります</string>
+    <string name="setting_sw_alac_desc">システムのデコーダーの代わりに常にソフトウェアALACデコーダーを使用します。遅延に影響する場合があります</string>
+    <string name="setting_sw_aac">ソフトウェアAACデコーダーを強制使用</string>
+    <string name="setting_sw_aac_desc">システムのデコーダーの代わりに常にソフトウェアAACデコーダーを使用します。遅延に影響する場合があります</string>
+    <string name="setting_sync_client_volume">送信側の音量を同期</string>
+    <string name="setting_sync_client_volume_desc">送信側の音量を、受信側の音量に自動的に反映します</string>
 
     <!-- Settings: Developer -->
     <string name="setting_developer_options">開発者向けオプション</string>
@@ -152,7 +167,7 @@
     <string name="setting_scheduled_output_buffer_release">フレームペーシング調整</string>
     <string name="setting_scheduled_output_buffer_release_desc">デコードした各フレームを、提示タイムスタンプに合ったVSYNCのタイミングに合わせてスケジュールします</string>
     <string name="setting_audio_delay">音声遅延を上書き</string>
-    <string name="setting_audio_delay_desc">クライアントに通知する音声遅延を手動で設定します</string>
+    <string name="setting_audio_delay_desc">送信側に通知する音声遅延を手動で設定します</string>
     <string name="audio_delay_value">%dms</string>
     <string name="setting_audio_auto_buffer">ソフトウェア音声バッファサイズを自動調整</string>
     <string name="setting_audio_auto_buffer_desc">ネットワーク状況や端末性能に応じてソフトウェア音声バッファを自動調整します。スライダーでバッファが吸収できるジッター量を調整できます</string>
@@ -181,9 +196,9 @@
     <string name="debug_fps_bitrate">FPS: %1$d  ビットレート: %2$s</string>
     <string name="debug_frames_drops">フレーム数: %1$d  ドロップ数: %2$d</string>
     <string name="debug_jitter">ジッター: %1$s</string>
-    <string name="debug_audio">%1$s  音量: %2$d%%</string>
+    <string name="debug_audio">%1$s  受信側: %2$d%%  送信側: %3$d%%</string>
     <string name="debug_audio_buffer">バッファ: %1$d ms（目標: %2$d ms）</string>
     <string name="debug_audio_glitch">グリッチ: trim=%1$d drop=%2$d sil=%3$d ur=%4$d xrun=%5$d</string>
     <string name="debug_audio_decode">デコード: %1$s</string>
-    <string name="debug_clients">クライアント数: %1$d</string>
+    <string name="debug_clients">送信側の数: %1$d</string>
 </resources>
